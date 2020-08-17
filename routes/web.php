@@ -22,6 +22,12 @@ Route::get('/categories', function () {
 Route::get('/cart', function () {
     return view('pages.cart');
 });
+Route::get('/success', function () {
+    return view('pages.transaction-success');
+});
+Route::get('/register-success', function () {
+    return view('pages.register-success');
+});
 Route::get('/products/details', function () {
     return view('pages.detail');
 });
