@@ -59,4 +59,6 @@ Route::get('/dashboard/transactions/{id}', function () {
 Route::get('/dashboard/settings', function () {
     return view('pages.dashboard-settings');
 });
-
+Route::get('/dashboard/account', function () {
+    return view('pages.dashboard-account');
+});
