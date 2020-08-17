@@ -42,3 +42,6 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard/products', function () {
     return view('pages.dashboard-products');
 });
+Route::get('/dashboard/products/details', function () {
+    return view('pages.dashboard-products-details');
+});

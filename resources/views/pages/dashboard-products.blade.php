@@ -90,3 +90,13 @@
             </div>
           </div>
 @endsection
+@push('addon-script')
+    <script>
+      AOS.init();
+      //   Show-Hide Menu
+      $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    </script>
+@endpush
