@@ -31,3 +31,7 @@ Route::get('/register-success', function () {
 Route::get('/products/details', function () {
     return view('pages.detail');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
