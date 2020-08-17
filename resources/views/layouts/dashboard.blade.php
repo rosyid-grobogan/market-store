@@ -25,36 +25,36 @@
           </div>
           <div class="list-group list-group-flush">
             <a
-              href="/dashboard.html"
-              class="list-group-item list-group-item-action active"
+              href="{{ url('dashboard') }}"
+              class="list-group-item list-group-item-action @yield('Dashboard')"
               >Dashboard</a
             >
             <a
-              href="/dashboard-products.html"
-              class="list-group-item list-group-item-action"
+              href="{{ url('dashboard/products') }}"
+              class="list-group-item list-group-item-action @yield('Products')"
             >
               My Products
             </a>
             <a
-              href="/dashboard-transactions.html"
-              class="list-group-item list-group-item-action"
+              href="{{ url('dashboard/transactions') }}"
+              class="list-group-item list-group-item-action @yield('Transactions')"
             >
               Transaction
             </a>
             <a
-              href="/dashboard-settings.html"
-              class="list-group-item list-group-item-action"
+              href="{{ url('dashboard/settings') }}"
+              class="list-group-item list-group-item-action @yield('Settings')"
             >
               Store Settings
             </a>
             <a
               href="/dashboard-account.html"
-              class="list-group-item list-group-item-action"
+              class="list-group-item list-group-item-action @yield('Account')"
             >
               My Account
             </a>
             <a
-              href="/index.html"
+              href="{{ url('logout') }}"
               class="list-group-item list-group-item-action"
             >
               Sign Out

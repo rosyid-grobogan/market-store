@@ -39,3 +39,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
 });
+Route::get('/dashboard/products', function () {
+    return view('pages.dashboard-products');
+});
