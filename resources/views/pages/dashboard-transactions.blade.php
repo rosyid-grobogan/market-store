@@ -54,7 +54,7 @@
                         aria-labelledby="pills-home-tab"
                       >
                         <a
-                          href="/dashboard-transactions-details.html"
+                          href="{{ url('dashboard/transactions/1') }}"
                           class="card card-list d-block"
                         >
                           <div class="card-body">
@@ -81,7 +81,7 @@
                         </a>
 
                         <a
-                          href="/dashboard-transactions-details.html"
+                          href="{{ url('dashboard/transactions/1') }}"
                           class="card card-list d-block"
                         >
                           <div class="card-body">
@@ -108,7 +108,7 @@
                         </a>
 
                         <a
-                          href="/dashboard-transactions-details.html"
+                          href="{{ url('dashboard/transactions/1') }}"
                           class="card card-list d-block"
                         >
                           <div class="card-body">
@@ -141,7 +141,7 @@
                         aria-labelledby="pills-profile-tab"
                       >
                         <a
-                          href="/dashboard-transactions-details.html"
+                          href="{{ url('dashboard/transactions/1') }}"
                           class="card card-list d-block"
                         >
                           <div class="card-body">

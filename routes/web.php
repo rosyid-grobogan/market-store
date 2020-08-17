@@ -52,3 +52,6 @@ Route::get('/dashboard/products/create', function () {
 Route::get('/dashboard/transactions', function () {
     return view('pages.dashboard-transactions');
 });
+Route::get('/dashboard/transactions/{id}', function () {
+    return view('pages.dashboard-transactions-details');
+});
