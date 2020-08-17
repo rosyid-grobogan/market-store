@@ -19,6 +19,9 @@ Route::get('/', function () {
 Route::get('/categories', function () {
     return view('pages.category');
 });
+Route::get('/cart', function () {
+    return view('pages.cart');
+});
 Route::get('/products/details', function () {
     return view('pages.detail');
 });
