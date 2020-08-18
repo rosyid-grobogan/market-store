@@ -62,3 +62,10 @@ Route::get('/dashboard/settings', function () {
 Route::get('/dashboard/account', function () {
     return view('pages.dashboard-account');
 });
+
+// Admin
+Route::prefix('admin')
+    ->namespace('Admin')
+    ->group(function() {
+        Route::get('/', 'DashboardController@index')->name('admin-dashboard');
+    });
