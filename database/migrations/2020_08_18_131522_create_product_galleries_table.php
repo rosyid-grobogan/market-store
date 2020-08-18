@@ -14,12 +14,12 @@ class CreateProductGalleriesTable extends Migration
     public function up()
     {
         Schema::create('product_galleries', function (Blueprint $table) {
-            $table->id();
-            $table->integer('products_id');
-            $table->string('photo');
+                $table->id();
+                $table->integer('products_id');
+                $table->string('photo');
 
-            $table->softDeletes();
-            $table->timestamps();
+                $table->softDeletes();
+                $table->timestamps();
         });
     }
 

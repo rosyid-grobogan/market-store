@@ -14,16 +14,16 @@ class CreateTransactionsTable extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
-            $table->integer('users_id');
-            $table->string('code');
-            $table->integer('inscurance_price');
-            $table->integer('shipping_price');
-            $table->integer('total_price');
-            $table->string('transaction_status');
+                $table->id();
+                $table->integer('users_id');
+                $table->string('code');
+                $table->integer('inscurance_price');
+                $table->integer('shipping_price');
+                $table->integer('total_price');
+                $table->string('transaction_status');
 
-            $table->softDeletes();
-            $table->timestamps();
+                $table->softDeletes();
+                $table->timestamps();
         });
     }
 

@@ -14,15 +14,15 @@ class CreateTransactionDetailsTable extends Migration
     public function up()
     {
         Schema::create('transaction_details', function (Blueprint $table) {
-            $table->id();
-            $table->integer('transactions_id');
-            $table->integer('products_id');
-            $table->string('code');
-            $table->integer('price');
-            $table->string('resi');
-            $table->string('shipping_status');
+                $table->id();
+                $table->integer('transactions_id');
+                $table->integer('products_id');
+                $table->string('code');
+                $table->integer('price');
+                $table->string('resi');
+                $table->string('shipping_status');
 
-            $table->timestamps();
+                $table->timestamps();
         });
     }
 
