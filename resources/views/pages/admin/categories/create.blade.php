@@ -19,7 +19,7 @@
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
-                                    @foreach ($errors as $erros)
+                                    @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
@@ -33,7 +33,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nama Kategori</label>
-                                                <input type="text" class="form-control" required>
+                                                <input type="text" name="name" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
