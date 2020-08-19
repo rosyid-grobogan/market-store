@@ -39,10 +39,10 @@ class CategoryController extends Controller
                     </div>
                     ';
                 })
-                ->editColumn('photo', function($item) {
-                    return $item->photo ? '<img src="'. Storage::url($item->photo) .'" style="max-height:40px;"  />' : '';
+                ->editColumn('icon', function($item) {
+                    return $item->icon ? '<img src="'. Storage::url($item->icon) .'" style="max-height:40px;"  />' : '';
                 })
-                ->rawColumns(['action', 'photo'])
+                ->rawColumns(['action', 'icon'])
                 ->make();
         }
         return view('pages.admin.categories.index');
@@ -69,7 +69,7 @@ class CategoryController extends Controller
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->name);
-        $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+        $data['icon'] = $request->file('icon')->store('assets/category', 'public');
 
         Category::create($data);
 

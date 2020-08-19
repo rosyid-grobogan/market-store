@@ -11,8 +11,8 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'photo',
-        'slug'
+        'slug',
+        'icon'
     ];
 
     protected $hidden = [

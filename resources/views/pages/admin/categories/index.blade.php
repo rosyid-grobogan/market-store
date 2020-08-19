@@ -62,8 +62,8 @@
             columns: [
                 { data: 'id', name: 'id'},
                 { data: 'name', name: 'name'},
+                { data: 'icon', name: 'icon'},
                 { data: 'slug', name: 'slug'},
-                { data: 'photo', name: 'photo'},
                 {
                     data: 'action',
                     name: 'action',
