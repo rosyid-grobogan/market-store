@@ -17,7 +17,7 @@
                     <div class="card mb-2">
                       <div class="card-body">
                         <div class="dashboard-card-title">Customer</div>
-                        <div class="dashboard-card-subtitle">15,209</div>
+                        <div class="dashboard-card-subtitle">{{ $sumCustomer }}</div>
                       </div>
                     </div>
                   </div>
@@ -26,7 +26,7 @@
                     <div class="card mb-2">
                       <div class="card-body">
                         <div class="dashboard-card-title">Revenue</div>
-                        <div class="dashboard-card-subtitle">932,290</div>
+                        <div class="dashboard-card-subtitle">Rp.{{ $sumRevenue }}</div>
                       </div>
                     </div>
                   </div>
@@ -35,7 +35,7 @@
                     <div class="card mb-2">
                       <div class="card-body">
                         <div class="dashboard-card-title">Transaction</div>
-                        <div class="dashboard-card-subtitle">23,500,347</div>
+                        <div class="dashboard-card-subtitle">{{ $sumTransaction }}</div>
                       </div>
                     </div>
                   </div>
