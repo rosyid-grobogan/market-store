@@ -36,7 +36,7 @@
               Products
             </a>
              <a
-              href="{{ url('dashboard/categories') }}"
+              href="{{ route('categories.index') }}"
               class="list-group-item list-group-item-action @yield('Categories')"
             >
               Categories
