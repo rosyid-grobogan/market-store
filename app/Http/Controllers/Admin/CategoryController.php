@@ -95,7 +95,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Category::findOrFail($id);
+
+        return view('pages.admin.categories.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -105,9 +109,21 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $data['slug'] = Str::slug($request->name);
+        if (!empty($data['icon'])) {
+            $data['icon'] = $request->file('icon')->store('assets/category', 'public');
+        }
+
+
+
+        $item = Category::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->route('categories.index');
     }
 
     /**
