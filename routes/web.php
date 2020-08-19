@@ -69,4 +69,5 @@ Route::prefix('admin')
     ->group(function() {
         Route::get('/', 'DashboardController@index')->name('admin-dashboard');
         Route::resource('categories', 'CategoryController');
+        Route::resource('users', 'UserController');
     });
