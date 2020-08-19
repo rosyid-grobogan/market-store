@@ -1,7 +1,9 @@
 @extends('layouts.admin')
 @section('title', 'Dashboard')
 @section('Dashboard', 'active')
-
+@push('addon-style')
+<link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/datatables.min.css') }}"/>
+@endpush
 @section('content')
           <div
             class="section-content section-dashboard-home"
@@ -131,4 +133,5 @@
         $("#wrapper").toggleClass("toggled");
       });
     </script>
+    <script type="text/javascript" src="{{ asset('vendor/DataTables/datatables.min.js') }}"></script>
 @endpush

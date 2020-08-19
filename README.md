@@ -1,10 +1,12 @@
 ## Market Store
 
-## JavaScript
+## Technologies
 
+-   Bootstrap v4.5x
 -   Vue JS
--   Jquery
+-   Jquery v3.5x
 
 ## Libraries
 
--   [Laravel DataTables v9](https://yajrabox.com)
+-   [Laravel DataTables v9x](https://yajrabox.com)
+-   [Data Tables v1.10](https://datatables.net/)
