@@ -7,7 +7,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Storage;
-
+use App\Http\Requests\CategoryRequest;
+use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
     /**
@@ -63,9 +64,16 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $data['slug'] = Str::slug($request->name);
+        $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+
+        Category::create($data);
+
+        return redirect()->route('categories.index');
     }
 
     /**
