@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -51,7 +55,13 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        $categories = Category::all();
+
+        return view('pages.admin.products.create', [
+            'users' => $users,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -60,9 +70,13 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->name);
+
+        Product::create($data);
+        return redirect()->route('products.index');
     }
 
     /**

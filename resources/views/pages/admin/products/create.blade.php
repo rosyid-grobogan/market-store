@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title', 'Users')
-@section('Users', 'active')
+@section('title', 'Products')
+@section('Products', 'active')
 @push('addon-style')
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/datatables.min.css') }}"/>
 @endpush
@@ -10,7 +10,7 @@
             data-aos="fade-up">
             <div class="container-fluid">
               <div class="dashboard-heading">
-                <h2 class="dashboard-title">Admin Users</h2>
+                <h2 class="dashboard-title">Admin Products</h2>
                 <p class="dashboard-subtitle">Create new user</p>
               </div>
               <div class="dashboard-content">
@@ -27,34 +27,45 @@
                         @endif
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Nama User</label>
+                                                <label>Nama Produk</label>
                                                 <input type="text" name="name" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Email User</label>
-                                                <input type="email" name="email" class="form-control" required>
-                                            </div>
-                                        </div>
-                                           <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Password User</label>
-                                                <input type="password" name="password" class="form-control">
+                                                <label>Pemilik Produk</label>
+                                                <select name="users_id" class="form-control">
+                                                    @foreach ($users as $user)
+                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Roles</label>
-                                                <select name="roles" class="form-control">
-                                                    <option value="ADMIN">Admin</option>
-                                                    <option value=USER>Users</option>
+                                                <label>Kategori Produk</label>
+                                                <select name="categories_id" class="form-control">
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    @endforeach
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Harga Produk</label>
+                                                <input type="number" name="price" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Deskripsi</label>
+                                                <textarea name="description" id="editor" cols="30" rows="10"></textarea>
                                             </div>
                                         </div>
 
@@ -84,5 +95,15 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
       });
+    </script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js"></script>
+    <script>
+      ClassicEditor.create(document.querySelector("#editor"))
+        .then((editor) => {
+          console.log(editor);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     </script>
 @endpush
