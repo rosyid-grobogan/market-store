@@ -29,7 +29,7 @@ class UserController extends Controller
                             <button class="btn btn-primary dropdown-toggle mr-1 mbr-1"
                             type="button" data-toggle="dropdown">Aksi</button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="' . route('categories.edit', $item->id) . '">Edit</a>
+                                <a class="dropdown-item" href="' . route('users.edit', $item->id) . '">Edit</a>
                                 <form action="' . route('categories.destroy', $item->id) .'" method="POST">
                                     '. method_field('delete') . csrf_field() .'
                                     <button type="submit" class="dropdown-item text-border-danger">Hapus</button>
@@ -89,7 +89,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = User::findOrFail($id);
+
+        return view('pages.admin.users.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -99,9 +103,25 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $item = User::findOrFail($id);
+
+        if ($request->email) {
+            $data['email'];
+        }else {
+            unset($data['email']);
+        }
+
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }else {
+            unset($data['password']);
+        }
+
+        $item->update($data);
+        return redirect()->route('users.index');
     }
 
     /**

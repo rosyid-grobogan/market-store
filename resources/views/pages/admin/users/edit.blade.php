@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title', 'Categories')
-@section('Categories', 'active')
+@section('title', 'Users')
+@section('Users', 'active')
 @push('addon-style')
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/datatables.min.css') }}"/>
 @endpush
@@ -10,8 +10,8 @@
             data-aos="fade-up">
             <div class="container-fluid">
               <div class="dashboard-heading">
-                <h2 class="dashboard-title">Admin Categories</h2>
-                <p class="dashboard-subtitle">Update category</p>
+                <h2 class="dashboard-title">Admin Users</h2>
+                <p class="dashboard-subtitle">Update user</p>
               </div>
               <div class="dashboard-content">
                 <div class="row mt-3">
@@ -27,20 +27,37 @@
                         @endif
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('categories.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('users.update', $item->id) }}" method="POST" enctype="multipart/form-data">
                                     @method('PUT')
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Nama Kategori</label>
+                                                <label>Nama User</label>
                                                 <input type="text" name="name" class="form-control" value="{{ $item->name }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Icon</label>
-                                                <input type="file" name="icon" class="form-control">
+                                                <label>Email User</label>
+                                                <input type="email" name="email" class="form-control" value="{{ $item->email }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Password User</label>
+                                                <input type="password" name="password" class="form-control">
+                                                <small>Kosongkan jika tidak ingin mengganti password</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Roles</label>
+                                                <select name="roles" class="form-control">
+                                                    <option value="{{ $item->roles }}">Tidak diganti</option>
+                                                    <option value="ADMIN">Admin</option>
+                                                    <option value=USER>Users</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
