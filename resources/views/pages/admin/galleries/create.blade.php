@@ -30,44 +30,24 @@
                                 <form action="{{ route('galleries.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
+
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nama Produk</label>
-                                                <input type="text" name="name" class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Pemilik Produk</label>
-                                                <select name="users_id" class="form-control">
-                                                    @foreach ($users as $user)
-                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                <select name="products_id" class="form-control">
+                                                    @foreach ($products as $product)
+                                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Kategori Produk</label>
-                                                <select name="categories_id" class="form-control">
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <label>Photo</label>
+                                                <input type="file" name="photo" class="form-control" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Harga Produk</label>
-                                                <input type="number" name="price" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Deskripsi</label>
-                                                <textarea name="description" id="editor" cols="30" rows="10"></textarea>
-                                            </div>
-                                        </div>
+
 
                                     </div>
                                     <div class="row">
@@ -95,15 +75,5 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
       });
-    </script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js"></script>
-    <script>
-      ClassicEditor.create(document.querySelector("#editor"))
-        .then((editor) => {
-          console.log(editor);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
     </script>
 @endpush
