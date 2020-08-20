@@ -71,4 +71,5 @@ Route::prefix('admin')
         Route::resource('categories', 'CategoryController');
         Route::resource('users', 'UserController');
         Route::resource('products', 'ProductController');
+        Route::resource('galleries', 'ProductGalleryController');
     });

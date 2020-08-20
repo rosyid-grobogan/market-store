@@ -36,6 +36,12 @@
               Products
             </a>
              <a
+              href="{{ route('galleries.index') }}"
+              class="list-group-item list-group-item-action @yield('Galleries')"
+            >
+              Galleries
+            </a>
+             <a
               href="{{ route('categories.index') }}"
               class="list-group-item list-group-item-action @yield('Categories')"
             >
