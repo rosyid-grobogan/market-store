@@ -70,4 +70,5 @@ Route::prefix('admin')
         Route::get('/', 'DashboardController@index')->name('admin-dashboard');
         Route::resource('categories', 'CategoryController');
         Route::resource('users', 'UserController');
+        Route::resource('products', 'ProductController');
     });
