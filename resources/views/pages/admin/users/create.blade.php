@@ -42,6 +42,12 @@
                                                 <input type="email" name="email" class="form-control" required>
                                             </div>
                                         </div>
+                                           <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Password User</label>
+                                                <input type="password" name="password" class="form-control">
+                                            </div>
+                                        </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Roles</label>
