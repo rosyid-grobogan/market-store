@@ -30,7 +30,7 @@ class UserController extends Controller
                             type="button" data-toggle="dropdown">Aksi</button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="' . route('users.edit', $item->id) . '">Edit</a>
-                                <form action="' . route('categories.destroy', $item->id) .'" method="POST">
+                                <form action="' . route('users.destroy', $item->id) .'" method="POST">
                                     '. method_field('delete') . csrf_field() .'
                                     <button type="submit" class="dropdown-item text-border-danger">Hapus</button>
                                 </form>
@@ -132,6 +132,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = User::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('users.index');
     }
 }
