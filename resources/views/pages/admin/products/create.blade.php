@@ -11,7 +11,7 @@
             <div class="container-fluid">
               <div class="dashboard-heading">
                 <h2 class="dashboard-title">Admin Products</h2>
-                <p class="dashboard-subtitle">Create new user</p>
+                <p class="dashboard-subtitle">Create new product</p>
               </div>
               <div class="dashboard-content">
                 <div class="row mt-3">

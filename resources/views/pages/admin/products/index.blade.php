@@ -18,7 +18,7 @@
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <div class="card-body">
-                            <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">+ Tambah User Baru</a>
+                            <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">+ Tambah Produk Baru</a>
                             <div class="table-responsive">
                                 <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
                                     <thead>
