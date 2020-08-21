@@ -25,9 +25,7 @@ Route::get('/success', function () {
 Route::get('/register-success', function () {
     return view('pages.register-success');
 });
-Route::get('/products/details', function () {
-    return view('pages.detail');
-});
+Route::get('/products/{slug}', 'FrontEnd\ProductController@index')->name('product-detail');
 
 Auth::routes();
 

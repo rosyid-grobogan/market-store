@@ -5,10 +5,10 @@ namespace App\Http\Controllers\FrontEnd;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
-    public function detail ()
+    public function index($slug)
     {
-        return view('pages.category');
+        return view('pages.detail');
     }
 }
