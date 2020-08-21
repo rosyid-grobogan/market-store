@@ -13,12 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
-Route::get('/categories', function () {
-    return view('pages.category');
-});
+Route::get('/', 'FrontEnd\HomeController@index')->name('home');
+Route::get('/categories', 'FrontEnd\CategoryController@index')->name('categories');
+Route::get('/categories/{slug}', 'FrontEnd\CategoryController@detail')->name('categories-detail');
 Route::get('/cart', function () {
     return view('pages.cart');
 });

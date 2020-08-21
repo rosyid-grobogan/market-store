@@ -82,94 +82,30 @@
             </div>
           </div>
           <div class="row">
-            <div
-              class="col-6 col-md-3 col-lg-2"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              <a href="#" class="component-categories d-block">
-                <div class="categories-image">
-                  <img src="/images/icon/gadgets.svg" alt="" class="w-100" />
-                </div>
-                <p class="categories-text">
-                  Gadgets
-                </p>
-              </a>
-            </div>
-            <div
-              class="col-6 col-md-3 col-lg-2"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              <a href="#" class="component-categories d-block">
-                <div class="categories-image">
-                  <img src="/images/icon/furniture.svg" alt="" class="w-100" />
-                </div>
-                <p class="categories-text">
-                  Funiture
-                </p>
-              </a>
-            </div>
+              @php
+                  $incrementCategory = 0
+              @endphp
+              @forelse ($categories as $category)
+                    <div
+                    class="col-6 col-md-3 col-lg-2"
+                    data-aos="fade-up"
+                    data-aos-delay="{{ $incrementCategory+= 100 }}"
+                    >
+                    <a href="{{ route('categories-detail', $category->slug) }}" class="component-categories d-block">
+                        <div class="categories-image">
+                        <img src="{{ Storage::url($category->icon) }}" alt="" class="w-100" />
+                        </div>
+                        <p class="categories-text">
+                        {{ $category->name }}
+                        </p>
+                    </a>
+                    </div>
+              @empty
+                    <div class="col-md-12 text-center py-5">
+                        No Category found. :(
+                    </div>
 
-            <div
-              class="col-6 col-md-3 col-lg-2"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            >
-              <a href="#" class="component-categories d-block">
-                <div class="categories-image">
-                  <img src="/images/icon/makeup.svg" alt="" class="w-100" />
-                </div>
-                <p class="categories-text">
-                  Make Up
-                </p>
-              </a>
-            </div>
-
-            <div
-              class="col-6 col-md-3 col-lg-2"
-              data-aos="fade-up"
-              data-aos-delay="400"
-            >
-              <a href="#" class="component-categories d-block">
-                <div class="categories-image">
-                  <img src="/images/icon/sneaker.svg" alt="" class="w-100" />
-                </div>
-                <p class="categories-text">
-                  Sneaker
-                </p>
-              </a>
-            </div>
-
-            <div
-              class="col-6 col-md-3 col-lg-2"
-              data-aos="fade-up"
-              data-aos-delay="500"
-            >
-              <a href="#" class="component-categories d-block">
-                <div class="categories-image">
-                  <img src="/images/icon/tools.svg" alt="" class="w-100" />
-                </div>
-                <p class="categories-text">
-                  Tools
-                </p>
-              </a>
-            </div>
-
-            <div
-              class="col-6 col-md-3 col-lg-2"
-              data-aos="fade-up"
-              data-aos-delay="600"
-            >
-              <a href="#" class="component-categories d-block">
-                <div class="categories-image">
-                  <img src="/images/icon/baby.svg" alt="" class="w-100" />
-                </div>
-                <p class="categories-text">
-                  Baby
-                </p>
-              </a>
-            </div>
+              @endforelse
           </div>
         </div>
       </section>
