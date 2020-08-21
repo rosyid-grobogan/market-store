@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'FrontEnd\HomeController@index')->name('home');
 Route::get('/categories', 'FrontEnd\CategoryController@index')->name('categories');
 Route::get('/categories/{slug}', 'FrontEnd\CategoryController@detail')->name('categories-detail');
+Route::get('/products', 'FrontEnd\ProductController@index')->name('products');
+Route::get('/products/{slug}', 'FrontEnd\ProductController@detail')->name('product-detail');
 Route::get('/cart', function () {
     return view('pages.cart');
 });
@@ -25,11 +27,10 @@ Route::get('/success', function () {
 Route::get('/register-success', function () {
     return view('pages.register-success');
 });
-Route::get('/products/{slug}', 'FrontEnd\ProductController@index')->name('product-detail');
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
