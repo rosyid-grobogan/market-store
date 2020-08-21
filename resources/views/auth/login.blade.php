@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 @section('title', 'Sign In Page')
-    
+
 @section('content')
     <div class="page-content page-auth">
       <div class="section-store-auth" data-aos="fade-up">
@@ -15,32 +15,35 @@
             </div>
             <div class="col-lg-5">
               <h2>Belanja kebutuhan utama, menjadi lebih mudah</h2>
-              <form action="">
+
+              <form method="POST" action="{{ route('login') }}" class="mt-3">
+                 @csrf
                 <div class="form-group">
-                  <label for="email">Email Address</label>
-                  <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    class="form-control w-75"
-                  />
+                  <label for="email">{{ __('Email Address') }}</label>
+                    <input type="email" class="form-control w-75 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
-                  <label for="password">Password</label>
-                  <input
-                    type="text"
-                    name="password"
-                    id="password"
-                    class="form-control w-75"
-                  />
+                  <label for="password">{{ __('Password') }}</label>
+                    <input type="password" class="form-control w-75 @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                <a
-                  href="/dashboard.html"
+                <button
+                  type="submit"
                   class="btn btn-success btn-block w-75 mt-4"
-                  >Sign In to My Account</a
-                >
+                  >Sign In to My Account</button>
                 <a
-                  href="/register.html"
+                  href="{{ route('register') }}"
                   class="btn btn-signup btn-block w-75 mt-4"
                   >Sign Up</a
                 >
