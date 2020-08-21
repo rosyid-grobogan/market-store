@@ -25,30 +25,30 @@
           </div>
           <div class="list-group list-group-flush">
             <a
-              href="{{ url('dashboard') }}"
+              href="{{ route('dashboard') }}"
               class="list-group-item list-group-item-action @yield('Dashboard')"
               >Dashboard</a
             >
             <a
-              href="{{ url('dashboard/products') }}"
+              href="{{ route('dashboard-products') }}"
               class="list-group-item list-group-item-action @yield('Products')"
             >
               My Products
             </a>
             <a
-              href="{{ url('dashboard/transactions') }}"
+              href="{{ route('dashboard-transactions') }}"
               class="list-group-item list-group-item-action @yield('Transactions')"
             >
               Transaction
             </a>
             <a
-              href="{{ url('dashboard/settings') }}"
+              href="{{ route('settings') }}"
               class="list-group-item list-group-item-action @yield('Settings')"
             >
               Store Settings
             </a>
             <a
-              href="/dashboard-account.html"
+              href="{{ route('account') }}"
               class="list-group-item list-group-item-action @yield('Account')"
             >
               My Account
@@ -99,13 +99,13 @@
                         alt=""
                         class="rounded-circle mr-2 profile-pricture"
                       />
-                      Hi, Hanna
+                      Hi, {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu">
-                      <a href="/dashboard.html" class="dropdown-item"
+                      <a href="{{ route('dashboard') }}" class="dropdown-item"
                         >Dashboard</a
                       >
-                      <a href="/dashboard-account.html" class="dropdown-item"
+                      <a href="{{ route('settings') }}" class="dropdown-item"
                         >Setting</a
                       >
                       <div class="dropdown-divider"></div>
@@ -123,7 +123,7 @@
                 <!-- Mobile -->
                 <ul class="navbar-nav d-block d-lg-none">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">Hi, Hanna</a>
+                    <a href="#" class="nav-link">Hi, {{ Auth::user()->name }}</a>
                   </li>
                   <li class="nav-item">
                     <a href="#" class="nav-link d-inline-block">Cart</a>

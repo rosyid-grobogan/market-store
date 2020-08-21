@@ -59,10 +59,10 @@
                       Hi, {{ Auth::User()->name }}
                     </a>
                     <div class="dropdown-menu">
-                      <a href="/dashboard.html" class="dropdown-item"
+                      <a href="{{ route('dashboard') }}" class="dropdown-item"
                         >Dashboard</a
                       >
-                      <a href="/dashboard-account.html" class="dropdown-item"
+                      <a href="{{ route('settings') }}" class="dropdown-item"
                         >Setting</a
                       >
                       <div class="dropdown-divider"></div>

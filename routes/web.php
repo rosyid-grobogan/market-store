@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Home
 Route::get('/', 'FrontEnd\HomeController@index')->name('home');
 Route::get('/categories', 'FrontEnd\CategoryController@index')->name('categories');
 Route::get('/categories/{slug}', 'FrontEnd\CategoryController@detail')->name('categories-detail');
@@ -21,9 +22,8 @@ Route::get('/products/{slug}', 'FrontEnd\ProductController@detail')->name('produ
 Route::get('/cart', function () {
     return view('pages.cart');
 });
-Route::get('/success', function () {
-    return view('pages.transaction-success');
-});
+
+// Auth
 Route::get('/register-success', function () {
     return view('pages.register-success');
 });
@@ -31,32 +31,21 @@ Route::get('/register-success', function () {
 
 Auth::routes();
 
+// Dashboard
+Route::prefix('dashboard')
+    ->namespace('FrontEnd')
+    ->group(function() {
+        Route::get('/', 'DashboardController@index')->name('dashboard');
+        Route::get('/products', 'DashboardController@products')->name('dashboard-products');
+        Route::get('/products/{slug}', 'DashboardController@detail')->name('products-detail');
+        Route::get('/settings', 'DashboardController@settings')->name('settings');
+        Route::get('/account', 'DashboardController@account')->name('account');
+        Route::get('/transactions', 'DashboardController@transactions')->name('dashboard-transactions');
+        Route::get('/transactions/{id}', 'DashboardController@transactionDetail')->name('transactions-detail');
+    });
 
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-});
-Route::get('/dashboard/products', function () {
-    return view('pages.dashboard-products');
-});
-Route::get('/dashboard/products/details', function () {
-    return view('pages.dashboard-products-details');
-});
 Route::get('/dashboard/products/create', function () {
     return view('pages.dashboard-products-create');
-});
-
-Route::get('/dashboard/transactions', function () {
-    return view('pages.dashboard-transactions');
-});
-Route::get('/dashboard/transactions/{id}', function () {
-    return view('pages.dashboard-transactions-details');
-});
-
-Route::get('/dashboard/settings', function () {
-    return view('pages.dashboard-settings');
-});
-Route::get('/dashboard/account', function () {
-    return view('pages.dashboard-account');
 });
 
 // Admin
@@ -69,3 +58,8 @@ Route::prefix('admin')
         Route::resource('products', 'ProductController');
         Route::resource('galleries', 'ProductGalleryController');
     });
+
+// Pages
+Route::get('/success', function () {
+    return view('pages.transaction-success');
+});
