@@ -10,32 +10,44 @@
                 Memulai untuk jual beli <br />
                 dengan cara terbaru
               </h2>
-              <form action="" class="mt-3">
+
+              <form method="POST" action="{{ route('register') }}" class="mt-3">
+                        @csrf
                 <div class="form-group">
                   <label>Full Name</label>
-                  <input
-                    type="text"
-                    class="form-control is-valid"
-                    v-model="name"
-                    autofocus
-                  />
+                  <input id="name" v-model="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                      @error('name')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                 </div>
                 <div class="form-group">
                   <label>Email Address</label>
-                  <input
-                    type="text"
-                    class="form-control is-invalid"
-                    v-model="email"
-                  />
+                  <input id="email" v-model="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input
-                    type="text"
-                    name="password"
-                    id="password"
-                    class="form-control"
-                  />
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                  <label for="password">Password Confirm</label>
+                    <input id="password-confirmation" type="password" class="form-control @error('password_confirm') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password">
+                    @error('password_confirmation')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                   <label>Store</label>
@@ -49,7 +61,7 @@
                       id="openStoreTrue"
                       class="custom-control-input"
                       v-model="is_store_open"
-                      :value="true"
+                      :value="1"
                     />
                     <label for="openStoreTrue" class="custom-control-label"
                       >Iya, boleh.</label
@@ -64,7 +76,7 @@
                       id="openStoreFalse"
                       class="custom-control-input"
                       v-model="is_store_open"
-                      :value="false"
+                      :value="0"
                     />
                     <label for="openStoreFalse" class="custom-control-label"
                       >Enggak, makasih.</label
@@ -73,18 +85,26 @@
                 </div>
                 <div class="form-group" v-if="is_store_open">
                   <label>Nama Toko</label>
-                  <input type="text" class="form-control" name="store_name" />
+                  <input type="text" class="form-control @error('store_name') is-invalid @enderror" name="store_name" v-model="store_name" id="store_name" />
+                  @error('store_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group" v-if="is_store_open">
                   <label for="">Category</label>
-                  <select name="category" class="form-control">
+                  <select name="categories_id" class="form-control">
                     <option disabled selected>Select Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                   </select>
                 </div>
-                <a href="/dashboard.html" class="btn btn-success btn-block mt-4"
-                  >Sign Up Now</a
+                <button class="btn btn-success btn-block mt-4"
+                  >Sign Up Now</button
                 >
-                <a href="/login.html" class="btn btn-signup btn-block mt-4"
+                <a href="{{ route('login') }}" class="btn btn-signup btn-block mt-4"
                   >Back to Sign In</a
                 >
               </form>
@@ -148,7 +168,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-ation" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -179,11 +199,11 @@
       var register = new Vue({
         el: "#register",
         data: {
-          name: "Rosyid Grobogan",
-          email: "rosyid@abc.com",
-          password: "",
-          is_store_open: true,
-          store_name: "",
+          name: '',
+          email: '',
+          password: '',
+          is_store_open: '',
+          store_name: '',
         },
         mounted() {
           AOS.init();
