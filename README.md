@@ -5,6 +5,7 @@
 -   Bootstrap v4.5x
 -   Vue JS
 -   Jquery v3.5x
+-   [Axios](https://github.com/axios/axios)
 
 ## Libraries
 

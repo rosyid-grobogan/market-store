@@ -1,4 +1,5 @@
 @extends('layouts.auth')
+@section('title', 'Register Page')
 
 @section('content')
     <div class="page-content page-auth" id="register">
@@ -24,7 +25,12 @@
                 </div>
                 <div class="form-group">
                   <label>Email Address</label>
-                  <input id="email" v-model="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                  <input id="email"
+                  v-model="email"
+                  @change="checkEmail()"
+                  :class="{ 'is-invalid' : this.email_unavailable }"
+                  type="email"
+                  class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -102,6 +108,7 @@
                   </select>
                 </div>
                 <button class="btn btn-success btn-block mt-4"
+                :disabled="this.email_unavailable"
                   >Sign Up Now</button
                 >
                 <a href="{{ route('login') }}" class="btn btn-signup btn-block mt-4"
@@ -193,28 +200,65 @@
 @push('addon-script')
     <script src="/vendor/vue/vue.js"></script>
     <script src="/vendor/vue-toasted/dist/vue-toasted.js"></script>
+    <script src="/vendor/axios/axios.min.js"></script>
     <script>
       Vue.use(Toasted);
 
       var register = new Vue({
         el: "#register",
-        data: {
-          name: '',
-          email: '',
-          password: '',
-          is_store_open: '',
-          store_name: '',
+        data() {
+            return {
+                name: '',
+                email: '',
+                email_unavailable:false,
+                is_store_open: '',
+                store_name: ''
+            }
+
+        },
+        methods: {
+          checkEmail: function() {
+            var self = this;
+            axios.get('{{ route('api-register-check') }}', {
+              params: {
+                email:this.email
+              }
+            })
+              .then(function (response) {
+                if(response.data == 'Available') {
+                  self.$toasted.show(
+                    "Email tersedia",
+                    {
+                      position: "top-center",
+                      className: "rounded",
+                      duration: 2000,
+                    }
+                  );
+                  self.email_unavailable = false;
+                }else {
+                  self.$toasted.error(
+                    "Maaf, Email tidak tersedia",
+                    {
+                      position: "top-center",
+                      className: "rounded",
+                      duration: 2000,
+                    }
+                  );
+                  self.email_unavailable = true;
+                }
+              });
+          }
         },
         mounted() {
           AOS.init();
-          this.$toasted.error(
-            "Maaf, tampaknya email sudah terdaftar pada sistem kami.",
-            {
-              position: "top-center",
-              className: "rounded",
-              duration: 1000,
-            }
-          );
+        //   this.$toasted.error(
+        //     "Maaf, tampaknya email sudah terdaftar pada sistem kami.",
+        //     {
+        //       position: "top-center",
+        //       className: "rounded",
+        //       duration: 1000,
+        //     }
+        //   );
         },
       });
     </script>
