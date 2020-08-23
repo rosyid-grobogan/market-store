@@ -83,6 +83,7 @@
                   @endphp
                   @endforeach
                 </tbody>
+
               </table>
             </div>
           </div>
@@ -91,7 +92,9 @@
               <hr />
             </div>
           </div>
-          <div class="row mb-1" data-aos="fade-up" data-aos-delay="200">
+        <form action="" method="post" id="locations">
+            @csrf
+           <div class="row mb-1" data-aos="fade-up" data-aos-delay="200">
             <div class="col-12">
               <h2 class="mb-4">Shipping Detail</h2>
             </div>
@@ -122,17 +125,34 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="province">Province</label>
-                <select name="province" id="province" class="form-control">
-                  <option value="West Java">West Java</option>
+                <select
+                v-if="provinces"
+                v-model="provinces_id"
+                name="province" id="provinces_id" class="form-control">
+                <option disabled="" selected="">Pilih -</option>
+                  <option
+                  v-for="province in provinces"
+                  :value="province.id"
+                  >@{{ province.name }}</option>
+                </select>
+                <select v-else class="form-control">
+
                 </select>
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label for="city">City</label>
-                <select name="city" id="city" class="form-control">
-                  <option value="Bandung">Bandung</option>
+                <select
+                v-if="regencies"
+                v-model="regencies_id"
+                name="city" id="regencies_id" class="form-control">
+                  <option
+                  v-for="regency in regencies"
+                  :value="regency.id"
+                  >@{{ regency.name }}</option>
                 </select>
+                <select v-else class="form-control"></select>
               </div>
             </div>
             <div class="col-md-4">
@@ -202,7 +222,51 @@
               >
             </div>
           </div>
+        </form>
         </div>
       </section>
     </div>
 @endsection
+
+@push('addon-script')
+<script src="{{ asset('/vendor/vue/vue.js') }}"></script>
+    <script src="/vendor/vue-toasted/dist/vue-toasted.js"></script>
+    <script src="/vendor/axios/axios.min.js"></script>
+<script>
+var locations = new Vue({
+    el: '#locations',
+    data: {
+        provinces: null,
+        regencies: null,
+        provinces_id: null,
+        regencies_id: null,
+    },
+    methods: {
+        getProvinces() {
+            var self = this;
+            axios.get('{{ route('api.provinces') }}')
+                .then(function(response) {
+                    self.provinces = response.data;
+                })
+        },
+        getRegencies() {
+            var self = this;
+            axios.get('{{ url('api/regencies') }}/' + self.provinces_id)
+                .then(function(response) {
+                    self.regencies = response.data;
+                })
+        }
+    },
+    mounted(){
+        this.getProvinces();
+        AOS.init();
+    },
+    watch: {
+        provinces_id: function(val, olVal) {
+            this.regencies_id = null;
+            this.getRegencies();
+        }
+    }
+})
+</script>
+@endpush
