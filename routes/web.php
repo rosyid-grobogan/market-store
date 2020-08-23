@@ -19,9 +19,10 @@ Route::get('/categories', 'FrontEnd\CategoryController@index')->name('categories
 Route::get('/categories/{slug}', 'FrontEnd\CategoryController@detail')->name('categories-detail');
 Route::get('/products', 'FrontEnd\ProductController@index')->name('products');
 Route::get('/products/{slug}', 'FrontEnd\ProductController@detail')->name('product-detail');
-Route::get('/cart', function () {
-    return view('pages.cart');
-});
+
+// Cart
+Route::post('/products/{id}', 'FrontEnd\CartController@add')->name('add-cart');
+Route::get('/cart', 'FrontEnd\CartController@index')->name('cart');
 
 // Auth
 Route::get('/register-success', function () {
