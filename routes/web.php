@@ -23,7 +23,7 @@ Route::get('/products/{slug}', 'FrontEnd\ProductController@detail')->name('produ
 // Cart
 Route::post('/products/{id}', 'FrontEnd\CartController@store')->name('add-cart');
 Route::get('/cart', 'FrontEnd\CartController@index')->name('cart');
-
+Route::delete('cart/{id}', 'FrontEnd\CartController@destroy')->name('cart.destroy');
 // Auth
 Route::get('/register-success', function () {
     return view('pages.register-success');

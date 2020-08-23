@@ -40,68 +40,42 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach ($carts as $cart)
                   <tr>
                     <td style="width: 25%;">
+                    @if ($cart->product->galleries)
                       <img
-                        src="/images/product-cart1.jpg"
+                        src="{{ Storage::url($cart->product->galleries->first()->photo) }}"
                         alt=""
                         class="cart-image"
-                      />
+                      />                        
+                    @else
+                      <img
+                        src=""
+                        alt="No Image"
+                        class="cart-image"
+                      />                        
+                    @endif
                     </td>
                     <td style="width: 35%;">
-                      <div class="product-title">Sofa Modern</div>
-                      <div class="product-subtitle">By Hanna</div>
+                      <div class="product-title">{{ $cart->product->name }}</div>
+                      <div class="product-subtitle">{{$cart->product->user->store_name }}</div>
                     </td>
                     <td style="width: 35%;">
-                      <div class="product-title">Rp5jt</div>
+                      <div class="product-title">{{ number_format($cart->product->price) }}</div>
                       <div class="product-subtitle">Rp</div>
                     </td>
                     <td style="width: 20%;">
-                      <a href="#" class="btn btn-remove-cart">Remove</a>
+                      <form action="{{ route('cart.destroy', $cart->id) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" 
+                      class="btn btn-remove-cart">Remove</button>
+                      </form>
+                      
                     </td>
-                  </tr>
-
-                  <tr>
-                    <td style="width: 25%;">
-                      <img
-                        src="/images/product-cart2.jpg"
-                        alt=""
-                        class="cart-image"
-                      />
-                    </td>
-                    <td style="width: 35%;">
-                      <div class="product-title">Sneaker</div>
-                      <div class="product-subtitle">By Sandika</div>
-                    </td>
-                    <td style="width: 35%;">
-                      <div class="product-title">Rp3jt</div>
-                      <div class="product-subtitle">Rp</div>
-                    </td>
-                    <td style="width: 20%;">
-                      <a href="#" class="btn btn-remove-cart">Remove</a>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td style="width: 25%;">
-                      <img
-                        src="/images/product-cart3.jpg"
-                        alt=""
-                        class="cart-image"
-                      />
-                    </td>
-                    <td style="width: 35%;">
-                      <div class="product-title">Coffe Holder</div>
-                      <div class="product-subtitle">By Lina</div>
-                    </td>
-                    <td style="width: 35%;">
-                      <div class="product-title">Rp300rb</div>
-                      <div class="product-subtitle">Rp</div>
-                    </td>
-                    <td style="width: 20%;">
-                      <a href="#" class="btn btn-remove-cart">Remove</a>
-                    </td>
-                  </tr>
+                  </tr>                      
+                  @endforeach
                 </tbody>
               </table>
             </div>
