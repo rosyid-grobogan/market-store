@@ -40,6 +40,9 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @php
+                      $totalPrice = 0
+                  @endphp
                   @foreach ($carts as $cart)
                   <tr>
                     <td style="width: 25%;">
@@ -48,13 +51,13 @@
                         src="{{ Storage::url($cart->product->galleries->first()->photo) }}"
                         alt=""
                         class="cart-image"
-                      />                        
+                      />
                     @else
                       <img
                         src=""
                         alt="No Image"
                         class="cart-image"
-                      />                        
+                      />
                     @endif
                     </td>
                     <td style="width: 35%;">
@@ -69,12 +72,15 @@
                       <form action="{{ route('cart.destroy', $cart->id) }}" method="POST">
                       @csrf
                       @method('DELETE')
-                      <button type="submit" 
+                      <button type="submit"
                       class="btn btn-remove-cart">Remove</button>
                       </form>
-                      
+
                     </td>
-                  </tr>                      
+                  </tr>
+                  @php
+                      $totalPrice += $cart->product->price
+                  @endphp
                   @endforeach
                 </tbody>
               </table>
@@ -173,19 +179,19 @@
               <h2 class="mb-4">Payment Informations</h2>
             </div>
             <div class="col-4 col-md-2">
-              <div class="product-title">Rp10rb</div>
+              <div class="product-title">Rp 0</div>
               <div class="product-subtitle">Country Tax</div>
             </div>
             <div class="col-4 col-md-3">
-              <div class="product-title">Rp50rb</div>
+              <div class="product-title">Rp 0</div>
               <div class="product-subtitle">Product Insurance</div>
             </div>
             <div class="col-4 col-md-2">
-              <div class="product-title">Rp50rb</div>
+              <div class="product-title">Rp 0</div>
               <div class="product-subtitle">Ship to Jakarta</div>
             </div>
             <div class="col-4 col-md-2">
-              <div class="product-title text-success">Rp10jt</div>
+              <div class="product-title text-success">Rp {{ number_format($totalPrice ?? 0) }}</div>
               <div class="product-subtitle">Total</div>
             </div>
             <div class="col-8 col-md-3">
