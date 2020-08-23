@@ -20,8 +20,12 @@ class ProductController extends Controller
         ]);
     }
 
-    public function detail($slug)
+    public function detail(Request $request, $slug)
     {
-        return view('pages.detail');
+        $product = Product::with('galleries', 'user')->where('slug', $slug)->firstOrFail();
+
+        return view('pages.detail', [
+            'product' => $product
+        ]);
     }
 }

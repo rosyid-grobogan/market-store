@@ -25,7 +25,7 @@
           </div>
         </div>
       </section>
-      <section class="store-gallery" id="gallery">
+      <section class="store-gallery mb-4" id="gallery">
         <div class="container">
           <div class="row">
             <div class="col-lg-8" data-aos="zoom-in">
@@ -67,16 +67,28 @@
           <div class="container">
             <div class="row">
               <div class="col-lg-8">
-                <h1>Sofa Modern</h1>
-                <div class="owner">By Hanna</div>
-                <div class="price">Rp5jt</div>
+                <h1>{{ $product->name }}</h1>
+                <div class="owner">By {{ $product->user->store_name }}</div>
+                <div class="price">Rp {{ number_format($product->price) }}</div>
               </div>
               <div class="col-lg-2" data-aos="zoom-in">
-                <a
-                  href="/cart.html"
+                  @auth
+                  <form action="#" method="POST">
+                      @csrf
+                <button
+                type="submit"
                   class="btn btn-success px-4 text-white btn-block mb-3"
-                  >Add to Cart</a
+                  >Add to Cart</button>
+                  </form>
+
+                  @else
+                <a
+                  href="{{ route('login') }}"
+                  class="btn btn-success px-4 text-white btn-block mb-3"
+                  >Sign in to Cart</a
                 >
+                  @endauth
+
               </div>
             </div>
           </div>
@@ -85,8 +97,7 @@
           <div class="container">
             <div class="row">
               <div class="col-lg-8">
-                <p>Sofa Modern terasa nyaman</p>
-                <p>Gaya lebih terkini</p>
+                {!! $product->description !!}
               </div>
             </div>
           </div>
@@ -151,22 +162,13 @@
         data: {
           activePhoto: 0,
           photos: [
+            @foreach($product->galleries as $gallery)
             {
-              id: 1,
-              url: "/images/details/product-details-1.jpg",
+              id: {{ $gallery->id }},
+              url: "{{ Storage::url($gallery->photo) }}",
             },
-            {
-              id: 2,
-              url: "/images/details/product-details-2.jpg",
-            },
-            {
-              id: 3,
-              url: "/images/details/product-details-3.jpg",
-            },
-            {
-              id: 4,
-              url: "/images/details/product-details-4.jpg",
-            },
+            @endforeach
+
           ],
         },
         mouted() {
