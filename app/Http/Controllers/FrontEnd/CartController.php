@@ -11,10 +11,16 @@ class CartController extends Controller
 {
     public function index()
     {
-        return view('pages.cart');
+        $carts = Cart::with(['product.galleries', 'user'])
+                    ->where('users_id', Auth::user()->id)
+                    ->get();
+
+        return view('pages.cart', [
+            'carts' => $carts
+        ]);
     }
 
-    public function add(Request $request, $id)
+    public function store(Request $request, $id)
     {
         $data = [
             'products_id' => $id,
@@ -22,6 +28,14 @@ class CartController extends Controller
         ];
 
         Cart::create($data);
+
+        return redirect()->route('cart');
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $cart = Cart::findOrFail($id);
+        $cart->delete();
 
         return redirect()->route('cart');
     }

@@ -21,7 +21,7 @@ Route::get('/products', 'FrontEnd\ProductController@index')->name('products');
 Route::get('/products/{slug}', 'FrontEnd\ProductController@detail')->name('product-detail');
 
 // Cart
-Route::post('/products/{id}', 'FrontEnd\CartController@add')->name('add-cart');
+Route::post('/products/{id}', 'FrontEnd\CartController@store')->name('add-cart');
 Route::get('/cart', 'FrontEnd\CartController@index')->name('cart');
 
 // Auth
