@@ -24,7 +24,7 @@ class DashboardController extends Controller
         return view('pages.dashboard.index', [
             'transaction_count' => $transactions->count(),
             'transaction_data' => $transactions->get(),
-            'revevue' => $revenue,
+            'revenue' => $revenue,
             'customer' => $customer
         ]);
     }

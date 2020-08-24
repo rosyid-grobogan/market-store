@@ -17,7 +17,7 @@
                     <div class="card mb-2">
                       <div class="card-body">
                         <div class="dashboard-card-title">Customer</div>
-                        <div class="dashboard-card-subtitle">15,209</div>
+                        <div class="dashboard-card-subtitle">{{ number_format($customer) }}</div>
                       </div>
                     </div>
                   </div>
@@ -26,7 +26,7 @@
                     <div class="card mb-2">
                       <div class="card-body">
                         <div class="dashboard-card-title">Revenue</div>
-                        <div class="dashboard-card-subtitle">932,290</div>
+                        <div class="dashboard-card-subtitle">{{ number_format($revenue) }}</div>
                       </div>
                     </div>
                   </div>
@@ -35,7 +35,7 @@
                     <div class="card mb-2">
                       <div class="card-body">
                         <div class="dashboard-card-title">Transaction</div>
-                        <div class="dashboard-card-subtitle">23,500,347</div>
+                        <div class="dashboard-card-subtitle">{{ number_format($transaction_count) }}</div>
                       </div>
                     </div>
                   </div>
@@ -43,21 +43,24 @@
                 <div class="row mt-3">
                   <div class="col-12 mt-2">
                     <h5 class="mb-3">Recent Transactions</h5>
-
+                    @forelse ($transaction_data as $transaction)
                     <a
-                      href="/dashboard-transactions-details.html"
-                      class="card card-list d-block"
-                    >
+                      href="{{ route('transactions-detail', $transaction->id) }}"
+                      class="card card-list d-block">
                       <div class="card-body">
                         <div class="row">
                           <div class="col-md-1">
-                            <img src="/images/dashboard1-44x44.jpg" alt="" />
+                            <img class="w-50" src="{{ Storage::url($transaction->product->galleries->first()->photo ?? '') }}" alt="{{ $transaction->product->name }}" />
                           </div>
                           <div class="col-md-4">
-                            Shirup Marzzan
+                            {{ $transaction->product->name }}
                           </div>
-                          <div class="col-md-3">Hanna</div>
-                          <div class="col-md-3">3 Agustus, 2020</div>
+                          <div class="col-md-3">
+                              {{ $transaction->transaction->user->name }}
+                          </div>
+                          <div class="col-md-3">
+                              {{ $transaction->created_at }}
+                          </div>
                           <div class="col-md-1 d-none d-md-block">
                             <img
                               src="/images/dashboard-arraw-right-34x34.svg"
@@ -67,54 +70,10 @@
                         </div>
                       </div>
                     </a>
+                    @empty
+                        <p>No Transaction</p>
+                    @endforelse
 
-                    <a
-                      href="/dashboard-transactions-details.html"
-                      class="card card-list d-block"
-                    >
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-md-1">
-                            <img src="/images/dashboard2-44x44.jpg" alt="" />
-                          </div>
-                          <div class="col-md-4">
-                            LeBrone X
-                          </div>
-                          <div class="col-md-3">Masayoshi</div>
-                          <div class="col-md-3">1 Agustus, 2020</div>
-                          <div class="col-md-1 d-none d-md-block">
-                            <img
-                              src="/images/dashboard-arraw-right-34x34.svg"
-                              alt=""
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-                    <a
-                      href="/dashboard-transactions-details.html"
-                      class="card card-list d-block"
-                    >
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-md-1">
-                            <img src="/images/dashboard3-44x44.jpg" alt="" />
-                          </div>
-                          <div class="col-md-4">
-                            Soffa Lembutte
-                          </div>
-                          <div class="col-md-3">Shayna</div>
-                          <div class="col-md-3">2 Agustus, 2020</div>
-                          <div class="col-md-1 d-none d-md-block">
-                            <img
-                              src="/images/dashboard-arraw-right-34x34.svg"
-                              alt=""
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </a>
                   </div>
                 </div>
               </div>
