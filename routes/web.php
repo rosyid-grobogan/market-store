@@ -24,6 +24,10 @@ Route::get('/products/{slug}', 'FrontEnd\ProductController@detail')->name('produ
 Route::post('/products/{id}', 'FrontEnd\CartController@store')->name('add-cart');
 Route::get('/cart', 'FrontEnd\CartController@index')->name('cart');
 Route::delete('cart/{id}', 'FrontEnd\CartController@destroy')->name('cart.destroy');
+Route::post('/checkout', 'FrontEnd\CheckoutController@prosess')->name('checkout');
+Route::post('/checkout/callback', 'FrontEnd\CheckoutController@callback')->name('midtrans.callback');
+
+
 // Auth
 Route::get('/register-success', function () {
     return view('pages.register-success');
