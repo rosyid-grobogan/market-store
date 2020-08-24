@@ -20,11 +20,6 @@ Route::get('/categories/{slug}', 'FrontEnd\CategoryController@detail')->name('ca
 Route::get('/products', 'FrontEnd\ProductController@index')->name('products');
 Route::get('/products/{slug}', 'FrontEnd\ProductController@detail')->name('product-detail');
 
-// Cart
-Route::post('/products/{id}', 'FrontEnd\CartController@store')->name('add-cart');
-Route::get('/cart', 'FrontEnd\CartController@index')->name('cart');
-Route::delete('cart/{id}', 'FrontEnd\CartController@destroy')->name('cart.destroy');
-Route::post('/checkout', 'FrontEnd\CheckoutController@prosess')->name('checkout');
 Route::post('/checkout/callback', 'FrontEnd\CheckoutController@callback')->name('midtrans.callback');
 
 
@@ -33,12 +28,21 @@ Route::get('/register-success', function () {
     return view('pages.register-success');
 });
 
+Route::group(['middleware' => ['auth']], function() {
+// Cart
+Route::post('/products/{id}', 'FrontEnd\CartController@store')->name('add-cart');
+Route::get('/cart', 'FrontEnd\CartController@index')->name('cart');
+Route::delete('cart/{id}', 'FrontEnd\CartController@destroy')->name('cart.destroy');
+Route::post('/checkout', 'FrontEnd\CheckoutController@prosess')->name('checkout');
+
+});
 
 Auth::routes();
 
 // Dashboard
 Route::prefix('dashboard')
     ->namespace('FrontEnd')
+    ->middleware(['auth'])
     ->group(function() {
         Route::get('/', 'DashboardController@index')->name('dashboard');
         Route::get('/products', 'DashboardController@products')->name('dashboard-products');
@@ -47,6 +51,7 @@ Route::prefix('dashboard')
         Route::get('/account', 'DashboardController@account')->name('account');
         Route::get('/transactions', 'DashboardController@transactions')->name('dashboard-transactions');
         Route::get('/transactions/{id}', 'DashboardController@transactionDetail')->name('transactions-detail');
+
     });
 
 Route::get('/dashboard/products/create', function () {
@@ -56,6 +61,7 @@ Route::get('/dashboard/products/create', function () {
 // Admin
 Route::prefix('admin')
     ->namespace('Admin')
+    ->middleware(['auth', 'admin'])
     ->group(function() {
         Route::get('/', 'DashboardController@index')->name('admin-dashboard');
         Route::resource('categories', 'CategoryController');
