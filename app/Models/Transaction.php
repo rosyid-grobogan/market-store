@@ -14,4 +14,9 @@ class Transaction extends Model
         'total_price',
         'code',
     ];
+
+    protected function user()
+    {
+        return $this->belongsTo(User::class, 'users_id', 'id');
+    }
 }
