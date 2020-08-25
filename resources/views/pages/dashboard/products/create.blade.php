@@ -31,6 +31,7 @@
                                 />
                               </div>
                             </div>
+
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label>Price</label>
@@ -42,10 +43,11 @@
                                 />
                               </div>
                             </div>
+
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label>Kategori</label>
-                                <select name="category" class="form-control">
+                                <select name="categories_id" class="form-control">
                                   @foreach ($categories as $category)
                                       <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
                                   @endforeach
@@ -53,6 +55,7 @@
                                 </select>
                               </div>
                             </div>
+
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label>Description</label>
@@ -65,6 +68,7 @@
                                 >
                               </div>
                             </div>
+
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label>Thumbnails</label>
@@ -78,7 +82,9 @@
                                 </p>
                               </div>
                             </div>
+
                           </div>
+
                           <div class="row mt-5">
                             <div class="col-12 text-right">
                               <button

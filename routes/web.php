@@ -29,11 +29,11 @@ Route::get('/register-success', function () {
 });
 
 Route::group(['middleware' => ['auth']], function() {
-// Cart
-Route::post('/products/{id}', 'FrontEnd\CartController@store')->name('add-cart');
-Route::get('/cart', 'FrontEnd\CartController@index')->name('cart');
-Route::delete('cart/{id}', 'FrontEnd\CartController@destroy')->name('cart.destroy');
-Route::post('/checkout', 'FrontEnd\CheckoutController@prosess')->name('checkout');
+    // Cart
+    Route::post('/products/{id}', 'FrontEnd\CartController@store')->name('add-cart');
+    Route::get('/cart', 'FrontEnd\CartController@index')->name('cart');
+    Route::delete('cart/{id}', 'FrontEnd\CartController@destroy')->name('cart.destroy');
+    Route::post('/checkout', 'FrontEnd\CheckoutController@prosess')->name('checkout');
 
 });
 
