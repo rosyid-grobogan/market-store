@@ -15,7 +15,7 @@ class Transaction extends Model
         'code',
     ];
 
-    protected function user()
+    public function user()
     {
         return $this->belongsTo(User::class, 'users_id', 'id');
     }

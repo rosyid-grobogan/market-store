@@ -1,3 +1,6 @@
+{{-- @php
+    dd($transaction_data);
+@endphp --}}
 @extends('layouts.dashboard')
 @section('title', 'Dashboard')
 @section('Dashboard', 'active')
@@ -56,7 +59,7 @@
                             {{ $transaction->product->name }}
                           </div>
                           <div class="col-md-3">
-                              {{ $transaction->transaction->user->name }}
+                              {{ $transaction->transaction->user->name ?? '' }}
                           </div>
                           <div class="col-md-3">
                               {{ $transaction->created_at }}
@@ -70,6 +73,7 @@
                         </div>
                       </div>
                     </a>
+
                     @empty
                         <p>No Transaction</p>
                     @endforelse
