@@ -30,7 +30,7 @@
               >Dashboard</a
             >
             <a
-              href="{{ route('dashboard-products') }}"
+              href="{{ route('dashboard.products') }}"
               class="list-group-item list-group-item-action @yield('Products')"
             >
               My Products

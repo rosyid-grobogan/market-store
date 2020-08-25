@@ -45,7 +45,7 @@ Route::prefix('dashboard')
     ->middleware(['auth'])
     ->group(function() {
         Route::get('/', 'DashboardController@index')->name('dashboard');
-        Route::get('/products', 'DashboardController@products')->name('dashboard-products');
+        // Route::get('/products', 'DashboardController@products')->name('dashboard-products');
         Route::get('/products/{slug}', 'DashboardController@detail')->name('products-detail');
         Route::get('/settings', 'DashboardController@settings')->name('settings');
         Route::get('/account', 'DashboardController@account')->name('account');
@@ -54,9 +54,17 @@ Route::prefix('dashboard')
 
     });
 
-Route::get('/dashboard/products/create', function () {
-    return view('pages.dashboard-products-create');
-});
+// Dashboard
+Route::prefix('dashboard')
+    ->namespace('Dashboard')
+    ->middleware(['auth'])
+    ->group(function() {
+        Route::get('products', 'ProductController@index')->name('dashboard.products');
+        Route::get('products/create', 'ProductController@create')->name('dashboard.products.create');
+        Route::get('products/{slug}', 'ProductController@show')->name('dashboard.products.details');
+    });
+
+
 
 // Admin
 Route::prefix('admin')
