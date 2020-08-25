@@ -14,7 +14,9 @@
               <div class="dashboard-content">
                 <div class="row">
                   <div class="col-12">
-                    <form action="">
+                    <form action="{{ route('dashboard.products.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
                       <div class="card">
                         <div class="card-body">
                           <div class="row">
@@ -23,9 +25,9 @@
                                 <label>Product Name</label>
                                 <input
                                   type="text"
-                                  name="product"
+                                  name="name"
                                   class="form-control"
-                                  value="Papel La Casa"
+
                                 />
                               </div>
                             </div>
@@ -36,7 +38,7 @@
                                   type="number"
                                   name="price"
                                   class="form-control"
-                                  value="197.000"
+
                                 />
                               </div>
                             </div>
@@ -44,7 +46,10 @@
                               <div class="form-group">
                                 <label>Kategori</label>
                                 <select name="category" class="form-control">
-                                  <option value="" selected>Shipping</option>
+                                  @foreach ($categories as $category)
+                                      <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                  @endforeach
+
                                 </select>
                               </div>
                             </div>
@@ -56,11 +61,7 @@
                                   rows="5"
                                   class="form-control"
                                   id="editor"
-                                >
-              The Nike Air Max 720 SE goes bigger than ever before with Nike's tallest Air unit yet for
-              unimaginable, all-day comfort. There's super breathable fabrics on the upper, while
-              colours add a modern edge. Bring the past into the future with the Nike Air Max 2090,
-              a bold look inspired by the DNA of the iconic Air Max 90. Brand-new Nike Air cushioning </textarea
+                                ></textarea
                                 >
                               </div>
                             </div>
@@ -69,7 +70,7 @@
                                 <label>Thumbnails</label>
                                 <input
                                   type="file"
-                                  name="gambar"
+                                  name="photo "
                                   class="form-control"
                                 />
                                 <p class="text-muted">

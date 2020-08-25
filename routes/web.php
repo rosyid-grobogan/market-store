@@ -46,7 +46,7 @@ Route::prefix('dashboard')
     ->group(function() {
         Route::get('/', 'DashboardController@index')->name('dashboard');
         // Route::get('/products', 'DashboardController@products')->name('dashboard-products');
-        Route::get('/products/{slug}', 'DashboardController@detail')->name('products-detail');
+        // Route::get('/products/{slug}', 'DashboardController@detail')->name('products-detail');
         Route::get('/settings', 'DashboardController@settings')->name('settings');
         Route::get('/account', 'DashboardController@account')->name('account');
         Route::get('/transactions', 'DashboardController@transactions')->name('dashboard-transactions');
@@ -60,6 +60,7 @@ Route::prefix('dashboard')
     ->middleware(['auth'])
     ->group(function() {
         Route::get('products', 'ProductController@index')->name('dashboard.products');
+        Route::post('products', 'ProductController@store')->name('dashboard.products.store');
         Route::get('products/create', 'ProductController@create')->name('dashboard.products.create');
         Route::get('products/{slug}', 'ProductController@show')->name('dashboard.products.details');
     });
