@@ -42,13 +42,13 @@
               Transaction
             </a>
             <a
-              href="{{ route('settings') }}"
+              href="{{ route('dashboard.settings') }}"
               class="list-group-item list-group-item-action @yield('Settings')"
             >
               Store Settings
             </a>
             <a
-              href="{{ route('account') }}"
+              href="{{ route('dashboard.account') }}"
               class="list-group-item list-group-item-action @yield('Account')"
             >
               My Account
@@ -105,7 +105,7 @@
                       <a href="{{ route('dashboard') }}" class="dropdown-item"
                         >Dashboard</a
                       >
-                      <a href="{{ route('settings') }}" class="dropdown-item"
+                      <a href="{{ route('dashboard.settings') }}" class="dropdown-item"
                         >Setting</a
                       >
                       <div class="dropdown-divider"></div>

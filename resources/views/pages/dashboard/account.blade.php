@@ -25,7 +25,7 @@
                                   type="text"
                                   name="name"
                                   class="form-control"
-                                  value="Papel La Casa"
+                                  value="{{ $user->name }}"
                                 />
                               </div>
                             </div>
@@ -35,7 +35,7 @@
                                 type="text"
                                 name="email"
                                 class="form-control"
-                                value="admin@abc.com"
+                                value="{{ $user->email }}"
                               />
                             </div>
                             <div class="col-md-6">
@@ -46,7 +46,7 @@
                                   type="text"
                                   name="addressOne"
                                   id="addressOne"
-                                  value="Setra Duta Cemara"
+                                  value="{{ $user->address_one }}"
                                 />
                               </div>
                             </div>
@@ -58,7 +58,7 @@
                                   type="text"
                                   name="addressTwo"
                                   id="addressTwo"
-                                  value="Blok B2 No. 34"
+                                  value="{{ $user->address_two }}"
                                 />
                               </div>
                             </div>
