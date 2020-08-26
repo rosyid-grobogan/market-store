@@ -63,6 +63,7 @@ Route::prefix('dashboard')
 
         Route::get('/transactions', 'TransactionController@index')->name('dashboard.transactions');
         Route::get('/transactions/{id}', 'TransactionController@show')->name('dashboard.transactions.show');
+        Route::post('/transactions/{id}', 'TransactionController@update')->name('dashboard.transactions.update');
 
         //
         Route::get('settings', 'SettingController@edit')->name('dashboard.settings');

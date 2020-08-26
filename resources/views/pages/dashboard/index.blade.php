@@ -48,7 +48,7 @@
                     <h5 class="mb-3">Recent Transactions</h5>
                     @forelse ($transaction_data as $transaction)
                     <a
-                      href="{{ route('transactions-detail', $transaction->id) }}"
+                      href="{{ route('dashboard.transactions.show', $transaction->id) }}"
                       class="card card-list d-block">
                       <div class="card-body">
                         <div class="row">
