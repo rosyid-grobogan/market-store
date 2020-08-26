@@ -36,7 +36,7 @@
               My Products
             </a>
             <a
-              href="{{ route('dashboard-transactions') }}"
+              href="{{ route('dashboard.transactions') }}"
               class="list-group-item list-group-item-action @yield('Transactions')"
             >
               Transaction
