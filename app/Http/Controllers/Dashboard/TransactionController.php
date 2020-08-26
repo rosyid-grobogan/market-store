@@ -29,6 +29,6 @@ class TransactionController extends Controller
 
     public function show()
     {
-        return view('pages.dashboard.transactions.details');
+        return view('pages.dashboard.transactions.show');
     }
 }

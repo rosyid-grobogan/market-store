@@ -62,7 +62,7 @@ Route::prefix('dashboard')
         Route::post('products/gallery/delete/{id}', 'ProductController@deleteGallery')->name(('dashboard.galleries.destroy'));
 
         Route::get('/transactions', 'TransactionController@index')->name('dashboard.transactions');
-        Route::get('/transactions/{id}', 'TransactionController@show')->name('dashboard.transactions.detail');
+        Route::get('/transactions/{id}', 'TransactionController@show')->name('dashboard.transactions.show');
 
         //
         Route::get('settings', 'SettingController@edit')->name('dashboard.settings');

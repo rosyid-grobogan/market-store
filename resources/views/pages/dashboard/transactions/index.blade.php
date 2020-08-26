@@ -53,86 +53,37 @@
                         role="tabpanel"
                         aria-labelledby="pills-home-tab"
                       >
+                        @forelse ($sellTransactions as $transaction)
                         <a
-                          href="{{ url('dashboard/transactions/1') }}"
-                          class="card card-list d-block"
-                        >
+                          href="{{ route('dashboard.transactions.show', $transaction->id) }}"
+                          class="card card-list d-block">
                           <div class="card-body">
                             <div class="row">
                               <div class="col-md-1">
                                 <img
-                                  src="/images/dashboard1-44x44.jpg"
-                                  alt=""
+                                  src="{{ Storage::url($transaction->product->galleries->first()->photo) }}"
+                                  alt="{{ $transaction->product->name }}"
+                                  class="w-50"
                                 />
                               </div>
                               <div class="col-md-4">
-                                Shirup Marzzan
+                                {{ $transaction->product->name }}
                               </div>
-                              <div class="col-md-3">Hanna</div>
-                              <div class="col-md-3">3 Agustus, 2020</div>
+                              <div class="col-md-3">{{ $transaction->product->user->store_name }}</div>
+                              <div class="col-md-3">{{ $transaction->created_at }}</div>
                               <div class="col-md-1 d-none d-md-block">
                                 <img
                                   src="/images/dashboard-arraw-right-34x34.svg"
-                                  alt=""
+                                  alt="arrow right"
                                 />
                               </div>
                             </div>
                           </div>
                         </a>
+                        @empty
+                            <p>Empty</p>
+                        @endforelse
 
-                        <a
-                          href="{{ url('dashboard/transactions/1') }}"
-                          class="card card-list d-block"
-                        >
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="col-md-1">
-                                <img
-                                  src="/images/dashboard2-44x44.jpg"
-                                  alt=""
-                                />
-                              </div>
-                              <div class="col-md-4">
-                                LeBrone X
-                              </div>
-                              <div class="col-md-3">Masayoshi</div>
-                              <div class="col-md-3">1 Agustus, 2020</div>
-                              <div class="col-md-1 d-none d-md-block">
-                                <img
-                                  src="/images/dashboard-arraw-right-34x34.svg"
-                                  alt=""
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-
-                        <a
-                          href="{{ url('dashboard/transactions/1') }}"
-                          class="card card-list d-block"
-                        >
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="col-md-1">
-                                <img
-                                  src="/images/dashboard3-44x44.jpg"
-                                  alt=""
-                                />
-                              </div>
-                              <div class="col-md-4">
-                                Soffa Lembutte
-                              </div>
-                              <div class="col-md-3">Shayna</div>
-                              <div class="col-md-3">2 Agustus, 2020</div>
-                              <div class="col-md-1 d-none d-md-block">
-                                <img
-                                  src="/images/dashboard-arraw-right-34x34.svg"
-                                  alt=""
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </a>
                       </div>
                       <div
                         class="tab-pane fade"
@@ -140,32 +91,37 @@
                         role="tabpanel"
                         aria-labelledby="pills-profile-tab"
                       >
+                        @forelse ($buyTransactions as $transaction)
                         <a
-                          href="{{ url('dashboard/transactions/1') }}"
-                          class="card card-list d-block"
-                        >
+                          href="{{ route('dashboard.transactions.show', $transaction->id) }}"
+                          class="card card-list d-block">
                           <div class="card-body">
                             <div class="row">
                               <div class="col-md-1">
                                 <img
-                                  src="/images/dashboard1-44x44.jpg"
-                                  alt=""
+                                  src="{{ Storage::url($transaction->product->galleries->first()->photo) }}"
+                                  alt="{{ $transaction->product->name }}"
+                                  class="w-50"
                                 />
                               </div>
                               <div class="col-md-4">
-                                Shirup Marzzan
+                                {{ $transaction->product->name }}
                               </div>
-                              <div class="col-md-3">Hanna</div>
-                              <div class="col-md-3">3 Agustus, 2020</div>
+                              <div class="col-md-3">{{ $transaction->product->user->store_name }}</div>
+                              <div class="col-md-3">{{ $transaction->created_at }}</div>
                               <div class="col-md-1 d-none d-md-block">
                                 <img
                                   src="/images/dashboard-arraw-right-34x34.svg"
-                                  alt=""
+                                  alt="arrow right"
                                 />
                               </div>
                             </div>
                           </div>
                         </a>
+                        @empty
+                            <p>Empty</p>
+                        @endforelse
+
                       </div>
                     </div>
                   </div>
