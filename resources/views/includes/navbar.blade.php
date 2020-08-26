@@ -62,7 +62,7 @@
                       <a href="{{ route('dashboard') }}" class="dropdown-item"
                         >Dashboard</a
                       >
-                      <a href="{{ route('settings') }}" class="dropdown-item"
+                      <a href="{{ route('dashboard.settings') }}" class="dropdown-item"
                         >Setting</a
                       >
                       <div class="dropdown-divider"></div>
