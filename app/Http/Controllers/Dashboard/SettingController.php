@@ -22,9 +22,10 @@ class SettingController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
+        
         $item = User::FindOrFail(Auth::user()->id);
 
         $item->update($data);

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Category;
+use App\Models\User;
 
 class AccountController extends Controller
 {
@@ -18,13 +18,13 @@ class AccountController extends Controller
         ]);
     }
 
-    public function update(Request $request, $redirect)
+    public function update(Request $request)
     {
         $data = $request->all();
-        $item = Auth::user();
+        $item = User::FindOrFail(Auth::user()->id);
 
         $item->update($data);
 
-        return redirect()->route($redirect);
+        return redirect()->route('dashboard.account');
     }
 }

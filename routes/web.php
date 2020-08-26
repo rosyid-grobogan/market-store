@@ -66,8 +66,9 @@ Route::prefix('dashboard')
         //
         Route::get('settings', 'SettingController@edit')->name('dashboard.settings');
         Route::put('settings', 'SettingController@update')->name('dashboard.settings.update');
+
         Route::get('account', 'AccountController@index')->name('dashboard.account');
-        Route::post('account', 'AccountController@store')->name('dashboard.account.store');
+        Route::put('account/{id}', 'AccountController@update')->name('dashboard.account.update');
     });
 
 

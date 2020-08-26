@@ -14,7 +14,9 @@
               <div class="dashboard-content">
                 <div class="row">
                   <div class="col-12">
-                    <form action="">
+                    <form action="{{ route('dashboard.account.update', Auth::user()->id) }}" id="locations" method="post">
+                        @csrf
+                        @method('PUT')
                       <div class="card">
                         <div class="card-body">
                           <div class="row">
@@ -44,7 +46,7 @@
                                 <input
                                   class="form-control"
                                   type="text"
-                                  name="addressOne"
+                                  name="address_one"
                                   id="addressOne"
                                   value="{{ $user->address_one }}"
                                 />
@@ -56,7 +58,7 @@
                                 <input
                                   class="form-control"
                                   type="text"
-                                  name="addressTwo"
+                                  name="address_two"
                                   id="addressTwo"
                                   value="{{ $user->address_two }}"
                                 />
@@ -66,24 +68,37 @@
                               <div class="form-group">
                                 <label for="province">Province</label>
                                 <select
-                                  name="province"
-                                  id="province"
+                                v-if="provinces"
+                                v-model="provinces_id"
+                                  name="provinces_id"
+                                  id="provinces_id"
                                   class="form-control"
                                 >
-                                  <option value="West Java">West Java</option>
+                                  <option disabled>Pilih</option>
+                                  <option
+                                  v-for="province in provinces"
+                                  :value="province.id"
+                                  >@{{ province.name }}</option>
                                 </select>
+                                <select v-else class="form-control"></select>
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="city">City</label>
                                 <select
-                                  name="city"
-                                  id="city"
+                                v-if="regencies"
+                                v-model="regencies_id"
+                                  name="regencies_id"
+                                  id="regencies_id"
                                   class="form-control"
                                 >
-                                  <option value="Bandung">Bandung</option>
+                                  <option disabled>Pilih</option>
+                                  <option
+                                  v-for="regency in regencies"
+                                  :value="regency.id">@{{ regency.name }}</option>
                                 </select>
+                                <select v-else class="form-control"></select>
                               </div>
                             </div>
                             <div class="col-md-4">
@@ -91,8 +106,9 @@
                                 <label for="postalCode">Postal Code</label>
                                 <input
                                   type="text"
+                                  name="zip_code"
                                   class="form-control"
-                                  value="40512"
+                                  value="{{ $user->zip_code }}"
                                   id="postalCode"
                                 />
                               </div>
@@ -105,7 +121,7 @@
                                   name="country"
                                   id="country"
                                   class="form-control"
-                                  value="Indonesia"
+                                  value="{{ $user->country }}"
                                 />
                               </div>
                             </div>
@@ -114,10 +130,10 @@
                                 <label for="mobile">Mobile</label>
                                 <input
                                   type="text"
-                                  name="mobile"
+                                  name="phone_number"
                                   id="mobile"
                                   class="form-control"
-                                  value="+628120202025"
+                                  value="{{ $user->phone_number }}"
                                 />
                               </div>
                             </div>
@@ -143,6 +159,9 @@
 @endsection
 
 @push('addon-script')
+<script src="{{ asset('/vendor/vue/vue.js') }}"></script>
+    <script src="/vendor/vue-toasted/dist/vue-toasted.js"></script>
+    <script src="/vendor/axios/axios.min.js"></script>
     <script>
       AOS.init();
       //   Show-Hide Menu
@@ -151,4 +170,41 @@
         $("#wrapper").toggleClass("toggled");
       });
     </script>
+<script>
+var locations = new Vue({
+    el: '#locations',
+    data: {
+        provinces: null,
+        regencies: null,
+        provinces_id: null,
+        regencies_id: null,
+    },
+    methods: {
+        getProvinces() {
+            var self = this;
+            axios.get('{{ route('api.provinces') }}')
+                .then(function(response) {
+                    self.provinces = response.data;
+                })
+        },
+        getRegencies() {
+            var self = this;
+            axios.get('{{ url('api/regencies') }}/' + self.provinces_id)
+                .then(function(response) {
+                    self.regencies = response.data;
+                })
+        }
+    },
+    mounted(){
+        this.getProvinces();
+        AOS.init();
+    },
+    watch: {
+        provinces_id: function(val, olVal) {
+            this.regencies_id = null;
+            this.getRegencies();
+        }
+    }
+})
+</script>
 @endpush
