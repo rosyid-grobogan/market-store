@@ -14,8 +14,17 @@
               <div class="dashboard-content">
                 <div class="row">
                   <div class="col-12">
-                    <form action="">
-                      <div class="card">
+                      @if ($errors->any())
+                          <ul>
+                              @foreach ($errors as $erros)
+                                  <li>{{ $error }}</li>
+                              @endforeach
+                          </ul>
+                      @endif
+                    <form action="{{ route('dashboard.products.update', $product->id) }}" method="post">
+                      @csrf
+                      <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
+                        <div class="card">
                         <div class="card-body">
                           <div class="row">
                             <div class="col-md-6">
@@ -23,9 +32,9 @@
                                 <label>Product Name</label>
                                 <input
                                   type="text"
-                                  name="product"
+                                  name="name"
                                   class="form-control"
-                                  value="Papel La Casa"
+                                  value="{{ $product->name }}"
                                 />
                               </div>
                             </div>
@@ -36,15 +45,18 @@
                                   type="number"
                                   name="price"
                                   class="form-control"
-                                  value="197.000"
+                                  value="{{ $product->price }}"
                                 />
                               </div>
                             </div>
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label>Kategori</label>
-                                <select name="category" class="form-control">
-                                  <option value="" selected>Shipping</option>
+                                <select name="categories_id" class="form-control">
+                                    <option value="{{ $product->categories_id }}" selected>Tidak diganti</option>
+                                  @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                  @endforeach
                                 </select>
                               </div>
                             </div>
@@ -56,11 +68,7 @@
                                   rows="5"
                                   class="form-control"
                                   id="editor"
-                                >
-              The Nike Air Max 720 SE goes bigger than ever before with Nike's tallest Air unit yet for
-              unimaginable, all-day comfort. There's super breathable fabrics on the upper, while
-              colours add a modern edge. Bring the past into the future with the Nike Air Max 2090,
-              a bold look inspired by the DNA of the iconic Air Max 90. Brand-new Nike Air cushioning </textarea
+                                >{!! $product->description !!}</textarea
                                 >
                               </div>
                             </div>
@@ -82,69 +90,45 @@
                 </div>
 
                 <div class="row mt-4">
+                @foreach ($product->galleries as $gallery)
                   <div class="col-md-4 mb-2">
                     <div class="card">
                       <div class="card-body">
                         <div class="gallery-container">
                           <img
-                            src="/images/product-card-214x160.jpg"
+                            src="{{ Storage::url($gallery->photo ?? '') }}"
                             alt=""
                             class="w-100"
                           />
-                          <a href="#" class="delete-gallery">
+                          <a href="{{ route('dashboard.galleries.destroy', $gallery->id) }}" class="delete-gallery">
                             <img src="/images/icon-delete-28x28.svg" alt="" />
                           </a>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-4 mb-2">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="gallery-container">
-                          <img
-                            src="/images/product-card-214x160-2.jpg"
-                            alt=""
-                            class="w-100"
-                          />
-                          <a href="#" class="delete-gallery">
-                            <img src="/images/icon-delete-28x28.svg" alt="" />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-2">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="gallery-container">
-                          <img
-                            src="/images/product-card-214x160-3.jpg"
-                            alt=""
-                            class="w-100"
-                          />
-                          <a href="#" class="delete-gallery">
-                            <img src="/images/icon-delete-28x28.svg" alt="" />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                @endforeach
+
 
                   <div class="col-12 mb-4 mt-4">
-                    <input
+                    <form action="{{ route('dashboard.galleries.upload') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="products_id" value="{{ $product->id }}">
+                        <input
                       type="file"
-                      name="gambar"
+                      name="photos"
                       id="file"
                       style="display: none;"
-                      multiple
+                      onchange="form.submit()"
                     />
                     <button
+                    type="button"
                       class="btn btn-secondary btn-block"
                       onclick="thisFileUpload()"
                     >
                       Add Photo
                     </button>
+                    </form>
                   </div>
                 </div>
               </div>

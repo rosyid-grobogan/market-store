@@ -62,7 +62,10 @@ Route::prefix('dashboard')
         Route::get('products', 'ProductController@index')->name('dashboard.products');
         Route::post('products', 'ProductController@store')->name('dashboard.products.store');
         Route::get('products/create', 'ProductController@create')->name('dashboard.products.create');
-        Route::get('products/{slug}', 'ProductController@show')->name('dashboard.products.details');
+        Route::get('products/{id}', 'ProductController@show')->name('dashboard.products.details');
+        Route::post('products/{slug}', 'ProductController@update')->name(('dashboard.products.update'));
+        Route::post('products/gallery/upload', 'ProductController@uploadGallery')->name(('dashboard.galleries.upload'));
+        Route::post('products/gallery/delete/{id}', 'ProductController@deleteGallery')->name(('dashboard.galleries.destroy'));
     });
 
 
