@@ -45,9 +45,6 @@ Route::prefix('dashboard')
     ->middleware(['auth'])
     ->group(function() {
         Route::get('/', 'DashboardController@index')->name('dashboard');
-        // Route::get('/products', 'DashboardController@products')->name('dashboard-products');
-        // Route::get('/products/{slug}', 'DashboardController@detail')->name('products-detail');
-
         Route::get('/transactions', 'DashboardController@transactions')->name('dashboard-transactions');
         Route::get('/transactions/{id}', 'DashboardController@transactionDetail')->name('transactions-detail');
 
@@ -67,7 +64,8 @@ Route::prefix('dashboard')
         Route::post('products/gallery/delete/{id}', 'ProductController@deleteGallery')->name(('dashboard.galleries.destroy'));
 
         //
-        Route::get('settings', 'DashboardController@settings')->name('dashboard.settings');
+        Route::get('settings', 'SettingController@edit')->name('dashboard.settings');
+        Route::put('settings', 'SettingController@update')->name('dashboard.settings.update');
         Route::get('account', 'AccountController@index')->name('dashboard.account');
         Route::post('account', 'AccountController@store')->name('dashboard.account.store');
     });

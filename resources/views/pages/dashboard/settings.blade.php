@@ -14,8 +14,10 @@
               <div class="dashboard-content">
                 <div class="row">
                   <div class="col-12">
-                    <form action="">
-                      <div class="card">
+                    <form action="{{ route('dashboard.settings.update', Auth::user()->id ) }}" method="POST">
+                      @csrf
+                       @method('PUT')
+                        <div class="card">
                         <div class="card-body">
                           <div class="row">
                             <div class="col-md-6">
@@ -23,8 +25,9 @@
                                 <label>Store Name</label>
                                 <input
                                   type="text"
-                                  name="name"
+                                  name="store_name"
                                   class="form-control"
+                                  value="{{ $user->store_name }}"
                                 />
                               </div>
                             </div>
@@ -36,7 +39,10 @@
                                   id=""
                                   class="form-control"
                                 >
-                                  <option disabled>Select Category</option>
+                                  <option value="{{ $user->categories_id }}">Tidak diganti</option>
+                                  @foreach ($categories as $category)
+                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                  @endforeach
                                 </select>
                               </div>
                             </div>
@@ -51,9 +57,11 @@
                                 >
                                   <input
                                     type="radio"
-                                    name="is_store_open"
+                                    name="store_status"
                                     id="openStoreTrue"
                                     class="custom-control-input"
+                                    value="1"
+                                    {{ $user->store_status == 1 ? 'checked': '' }}
                                   />
                                   <label
                                     for="openStoreTrue"
@@ -66,9 +74,11 @@
                                 >
                                   <input
                                     type="radio"
-                                    name="is_store_open"
+                                    name="store_status"
                                     id="openStoreFalse"
                                     class="custom-control-input"
+                                    value="0"
+                                    {{ $user->store_status == 0 || $user->store_status == NULL ? 'checked' : '' }}
                                   />
                                   <label
                                     for="openStoreFalse"
