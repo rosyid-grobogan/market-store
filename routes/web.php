@@ -45,8 +45,6 @@ Route::prefix('dashboard')
     ->middleware(['auth'])
     ->group(function() {
         Route::get('/', 'DashboardController@index')->name('dashboard');
-        Route::get('/transactions', 'DashboardController@transactions')->name('dashboard-transactions');
-        Route::get('/transactions/{id}', 'DashboardController@transactionDetail')->name('transactions-detail');
 
     });
 
@@ -62,6 +60,9 @@ Route::prefix('dashboard')
         Route::post('products/{slug}', 'ProductController@update')->name(('dashboard.products.update'));
         Route::post('products/gallery/upload', 'ProductController@uploadGallery')->name(('dashboard.galleries.upload'));
         Route::post('products/gallery/delete/{id}', 'ProductController@deleteGallery')->name(('dashboard.galleries.destroy'));
+
+        Route::get('/transactions', 'TransactionController@index')->name('dashboard.transactions');
+        Route::get('/transactions/{id}', 'TransactionController@show')->name('dashboard.transactions.detail');
 
         //
         Route::get('settings', 'SettingController@edit')->name('dashboard.settings');
