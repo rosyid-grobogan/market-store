@@ -69,43 +69,46 @@
                             <h5>Shipping Information</h5>
                             <hr />
                           </div>
-                          <div class="col-12">
+
+                          <form action="{{ route('dashboard.transactions.update', $transaction->id) }}" method="post">
+                          @csrf
+                            <div class="col-12">
                             <div class="row">
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Address 1</div>
                                 <div class="product-subtitle">
-                                  Setra Duta Cemara
+                                  {{ $transaction->transaction->user->address_one }}
                                 </div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Address 2</div>
                                 <div class="product-subtitle">
-                                  Blok B2 No. 34
+                                  {{ $transaction->transaction->user->address_two }}
                                 </div>
                               </div>
 
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Province</div>
                                 <div class="product-subtitle">
-                                  West Java
+                                  {{ App\Models\Province::find($transaction->transaction->user->provinces_id)->name }}
                                 </div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">City</div>
                                 <div class="product-subtitle">
-                                  Bandung
+                                  {{ App\Models\Regency::find($transaction->transaction->user->regencies_id)->name }}
                                 </div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Postal Code</div>
                                 <div class="product-subtitle">
-                                  524442
+                                  {{ $transaction->transaction->user->zip_code }}
                                 </div>
                               </div>
                               <div class="col-12 col-md-6">
                                 <div class="product-title">Country</div>
                                 <div class="product-subtitle">
-                                  Indonesia
+                                  {{ $transaction->transaction->user->country }}
                                 </div>
                               </div>
 
@@ -113,7 +116,7 @@
                                 <div class="product-title">Shipping Status</div>
 
                                 <select
-                                  name="status"
+                                  name="shipping_status"
                                   id="status"
                                   class="form-control product-subtitle"
                                   v-model="status"
@@ -154,6 +157,8 @@
                               </div>
                             </div>
                           </div>
+                          </form>
+
                         </div>
                       </div>
                     </div>
@@ -178,8 +183,8 @@
       var transactionDetails = new Vue({
         el: "#transactionDetails",
         data: {
-          status: "SHIPPING",
-          resi: "JNE20839149021029301231",
+          status: "{{ $transaction->shipping_status }}",
+          resi: "{{ $transaction->resi }}",
         },
       });
     </script>
